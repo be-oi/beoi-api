@@ -1,0 +1,73 @@
+
+service: beoi-api
+
+frameworkVersion: ">=1.9.0 <1.10.0"
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+  stage: dev
+  region: eu-west-1
+  profile: beoi
+  timeout: 6
+  # environment:
+    # - ENV: ${self:custom.env}
+
+custom:
+  env: ${opt:stage, self:provider.stage}
+  dbvpc:
+    securityGroupIds:
+      - sg-5508df33
+    subnetIds:
+      - subnet-1e45c846
+      - subnet-d7581bb3
+      - subnet-3e8cf548
+
+functions:
+
+  scores_history:
+    handler: handler.scores_history
+    vpc: ${self:custom.dbvpc}
+    events:
+      - http:
+          path: scores/history
+          method: GET
+          cors: true
+
+  scores_current:
+    handler: handler.scores_current
+    vpc: ${self:custom.dbvpc}
+    events:
+      - http:
+          path: scores/current
+          method: GET
+          cors: true
+
+  scores_compute:
+    handler: handler.scores_compute
+    vpc: ${self:custom.dbvpc}
+    events:
+      - http:
+          path: scores/compute
+          method: POST
+          cors: true
+      - schedule: rate(1 hour)
+
+  activities_latest:
+    handler: handler.activities_latest
+    vpc: ${self:custom.dbvpc}
+    events:
+      - http:
+          path: activities/latest
+          method: GET
+          cors: true
+
+  activities_compute:
+    handler: handler.activities_compute
+    vpc: ${self:custom.dbvpc}
+    events:
+      - http:
+          path: activities/compute
+          method: POST
+          cors: true
+      - schedule: rate(1 hour)
