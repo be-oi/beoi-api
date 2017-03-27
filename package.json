@@ -3,7 +3,7 @@
   "license": "MIT",
   "scripts": {
     "db:migrate:create": "./node_modules/db-migrate/bin/db-migrate create --config config/db.json",
-    "db:migrate": "./node_modules/db-migrate/bin/db-migrate up --config config/db.json -e prod"
+    "db:migrate": "./node_modules/db-migrate/bin/db-migrate up --config config/db.json -e dev"
   },
   "dependencies": {
     "db-migrate": "^0.10.0-beta.20",

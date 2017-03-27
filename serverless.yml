@@ -10,11 +10,18 @@ provider:
   region: eu-west-1
   profile: beoi
   timeout: 6
-  # environment:
-    # - ENV: ${self:custom.env}
+  environment:
+    STAGE: ${self:custom.stage}
+    DB_DRIVER: ${self:custom.dbconf.driver}
+    DB_HOST: ${self:custom.dbconf.host}
+    DB_USER: ${self:custom.dbconf.user}
+    DB_PASSWORD: ${self:custom.dbconf.password}
+    DB_DATABASE: ${self:custom.dbconf.database}
+  vpc: ${self:custom.dbvpc}
 
 custom:
-  env: ${opt:stage, self:provider.stage}
+  stage: ${opt:stage, self:provider.stage}
+  dbconf: ${file(config/db.json):${self:custom.stage}}
   dbvpc:
     securityGroupIds:
       - sg-5508df33
@@ -24,6 +31,20 @@ custom:
       - subnet-3e8cf548
 
 functions:
+
+  index:
+    handler: handler.index
+    events:
+      - http:
+          path: ""
+          method: GET
+
+  ping:
+    handler: handler.ping
+    events:
+      - http:
+          path: ping
+          method: GET
 
   scores_history:
     handler: handler.scores_history

@@ -3,6 +3,9 @@ build
 node_modules
 jspm_packages
 
+# Config
+/config/db.json
+
 # Cruft
 .DS_Store
 npm-debug.log
