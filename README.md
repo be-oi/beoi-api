@@ -11,7 +11,7 @@ This project uses [Serverless](https://serverless.com/) project to deploy easily
 
 The following list of tools is required. It may work with lower version, but with no guarantees.
 
-* nodejs >= 7.5
+* nodejs >= 6.10
 * npm >= 4.1
 
 ## Quick-start
@@ -72,8 +72,12 @@ If you need to run migration, you need direct access to the database, so to conf
 
 To redeploy the full stack:
 
-    ./node_modules/serverless/bin/serverless deploy function
+    ./node_modules/serverless/bin/serverless deploy
 
 To (re)deploy a single function:
 
-    ./node_modules/serverless/bin/serverless deploy function -f demo
+    ./node_modules/serverless/bin/serverless deploy function -f ping
+
+To run this function in the cloud:
+
+    ./node_modules/serverless/bin/serverless deploy function -f ping

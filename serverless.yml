@@ -1,11 +1,11 @@
 
 service: beoi-api
 
-frameworkVersion: ">=1.9.0 <1.10.0"
+frameworkVersion: ">=1.10.0 <1.11.0"
 
 provider:
   name: aws
-  runtime: nodejs4.3
+  runtime: nodejs6.10
   stage: dev
   region: eu-west-1
   profile: beoi
