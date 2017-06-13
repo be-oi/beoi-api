@@ -3,6 +3,9 @@ service: beoi-api
 
 frameworkVersion: ">=1.10.0 <1.11.0"
 
+plugins:
+  - serverless-mocha-plugin # Might be useful
+
 provider:
   name: aws
   runtime: nodejs6.10
@@ -91,4 +94,34 @@ functions:
           path: activities/compute
           method: POST
           cors: true
+      - schedule: rate(1 hour)
+
+  submissions_user:
+    handler: handler.submissions_user
+    vpc: ${self:custom.dbvpc}
+    events:
+      - http:
+          path: submissions/user
+          method: GET
+          cors: true
+          request:
+            application/json: >
+              {
+                "id": "$input.params('id')",
+                "uva": "$input.params('uva')"
+              }
+
+  problems_all:
+    handler: handler.problems_all
+    vpc: ${self:custom.dbvpc}
+    events:
+      - http:
+        path: problems
+        method: GET
+        cors: true
+
+  uva_update_problems:
+    handler: handler.uva_update_problems
+    vpc: ${self:custom.dbvpc}
+    events:
       - schedule: rate(1 hour)
