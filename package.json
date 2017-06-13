@@ -9,9 +9,13 @@
     "db-migrate": "^0.10.0-beta.20",
     "db-migrate-pg": "^0.1.11",
     "pg": "^6.1.4",
-    "serverless-secrets-plugin": "0.0.1"
+    "serverless-secrets-plugin": "0.0.1",
+    "request": "*",
+    "lodash": "*",
+    "sprintf-js": "*"
   },
   "devDependencies": {
-    "serverless": "^1.10.0"
+    "serverless": "^1.10.0",
+    "serverless-mocha-plugin": "^1.3.5"
   }
 }
