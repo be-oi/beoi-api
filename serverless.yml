@@ -125,4 +125,3 @@ functions:
     vpc: ${self:custom.dbvpc}
     events:
       - schedule: rate(1 hour)
-
