@@ -92,3 +92,6 @@ functions:
           method: POST
           cors: true
       - schedule: rate(1 hour)
+
+plugins:
+    - serverless-offline

@@ -54,6 +54,14 @@ You should now be able to call a service locally to your local database:
 
 You can follow the path from the service definition to the implementation through `serverless.yml`, `handle.js` and `lib/status.js`.
 
+### Use a local development API server
+
+After running
+
+    ./node_modules/serverless/bin/serverless offline
+
+a development server should make the endpoints available on http://localhost:3000
+
 ## Deployment into Production
 
 In production, the code run on AWS, so you first need to configure your environment for it.
